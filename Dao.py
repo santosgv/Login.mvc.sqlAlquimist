@@ -1,4 +1,4 @@
-from Model import  Usuario,retornaSession
+from Model import Usuario,retornaSession
 
 session = retornaSession()
 
@@ -9,11 +9,18 @@ class CadastroDao:
         usuarios =session.query(Usuario).all()
 
         for i in usuarios:
-            print(i.nome,i.email,i.senha)
+            user = (i.nome,i.email,i.senha)
+
+        return user[0],user[1],user[2]
 
     @classmethod
-    def salvar(cls):
-        ...
+    def salvar(cls ,nome ,email,senha):
+        session = retornaSession()
+        user = Usuario(nome=nome,
+                       email=email,
+                       senha=senha)
+        session.add(user)
+        session.commit()
 
 
 a=CadastroDao()
