@@ -23,3 +23,11 @@ class CadastroDao:
         session.add(user)
         session.commit()
 
+    @classmethod
+    def logar(cls,email,senha):
+        session =retornaSession()
+        login = session.query(Usuario).filter(Usuario.email == email).filter(Usuario.senha == senha)
+        log = []
+        for i in login:
+            log.append(i)
+        return log

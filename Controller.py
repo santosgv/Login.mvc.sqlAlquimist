@@ -3,30 +3,45 @@ import re
 
 class controllerCadastro:
     def cadastrarUsuario(self, nome, email, senha):
+        '''
+
+        :param nome:
+        :param email:
+        :param senha:
+        :return:
+        '''
         x = CadastroDao.ler()
         existe = False
         for i in x:
-            if i.nome == nome or i.email == email:
+            if i.nome == nome or i.email == email and i.ativo == 1:
                 existe =True
-                print('Ja existem um usuario com estes dados no sistema')
-
+                return existe and 1
         if len(nome) < 5:
-            print('O nome precisa ser maior que 5 caracteres')
+            existe = False
+            return 1 and existe
 
         if not re.match(r"[^@]+@[^@]+\.[^@]+", email):
-            print('Digite um email valido')
+            existe = False
+            return 2 and existe
 
-        if not re.match(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])(?:([0-9a-zA-Z$*&@#])(?!\1)){8,}$",senha):
-            print('''Sua senha precisa ser Forte !!!
-                deve conter ao menos um dígito
-            * deve conter ao menos uma letra minúscula         
-            * deve conter ao menos uma letra maiúscula         
-            * deve conter ao menos um caractere especial       
-            * deve conter ao menos 8 dos caracteres mencionados
-                    ''')
+        if not re.match(r"^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[$*&@#])(?:([0-9a-zA-Z$*&@#])(?!\1)){8,}$", senha):
+            existe = False
+            return 3 and existe
 
-        if  existe == False :
+        if  existe == False:
             CadastroDao.salvar(nome, email, senha)
-            print('Cadastrado com sucesso')
+            return 4
 
-    def logaSistema(self):
+class controllerLogar:
+    def logaSistema(self,email,senha):
+        '''
+
+        :param email:
+        :param senha:
+        :return:
+        '''
+        x = CadastroDao.logar(email,senha)
+        if len(x) == 0:
+            return 1
+        else:
+            return 2
