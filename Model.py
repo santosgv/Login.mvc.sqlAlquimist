@@ -1,4 +1,4 @@
-from sqlalchemy import  create_engine , Column , Integer , String
+from sqlalchemy import  create_engine , Column , Integer , String ,BOOLEAN
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
@@ -16,10 +16,11 @@ def retornaSession():
 
 class Usuario(Base):
     __tablename__ ="Usuaio"
-    id =Column(Integer , primary_key=True)
+    id = Column(Integer , primary_key=True)
     nome = Column(String(50))
     email = Column(String(50))
     senha = Column(String(50))
+    ativo = Column(BOOLEAN)
 
 
 Base.metadata.create_all(engine)
