@@ -96,7 +96,3 @@ class Aplicacao(validacao):
         self.lbAlerta.place(relx=0.01, rely=0.40)
         self.btCadastroUsuario = Button(nwwindow, text='Cadastrar Usuario', bg='green',command=self.cadastrar)
         self.btCadastroUsuario.place(relx=0.30, rely=0.80)
-
-
-Aplicacao()
-
