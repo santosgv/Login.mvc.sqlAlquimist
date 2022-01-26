@@ -17,9 +17,9 @@ def retornaSession():
 class Usuario(Base):
     __tablename__ ="Usuario"
     id = Column(Integer , primary_key=True)
-    nome = Column(String(50))
+    nome = Column(String(100))
     email = Column(String(50))
-    senha = Column(String(50))
+    senha = Column(String(100))
     ativo = Column(BOOLEAN)
 
 

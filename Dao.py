@@ -4,9 +4,9 @@ session = retornaSession()
 
 class CadastroDao:
     @classmethod
-    def ler(cls):
+    def ler(cls ,email):
         session=retornaSession()
-        usuarios =session.query(Usuario).all()
+        usuarios =session.query(Usuario).filter(Usuario.email == email).all()
         user = []
         for i in usuarios:
             user.append(i)
@@ -16,13 +16,14 @@ class CadastroDao:
     @classmethod
     def salvar(cls ,nome ,email,senha):
         session = retornaSession()
-        user = Usuario(nome=nome,
-                       email=email,
-                       senha=senha,
+        user = Usuario(nome=str(nome),
+                       email=str(email),
+                       senha=str(senha),
                        ativo=True)
         session.add(user)
         session.commit()
 
+class logarDao:
     @classmethod
     def logar(cls,email,senha):
         session =retornaSession()

@@ -22,30 +22,23 @@ class validacao():
 
         user = controllerCadastro()
 
-        if user.cadastrarUsuario(nome,email,senha) == 1:
-            self.lbAlerta['text'] ='O nome precisa ser maior que 5 caracteres'
-
         if user.cadastrarUsuario(nome,email,senha) == 2:
-            self.lbAlerta['text'] ='Digite um email valido'
-
-
+            self.lbAlerta['text'] ='O nome precisa ser maior que 5 caracteres'
         if user.cadastrarUsuario(nome, email, senha) == 3:
-            self.lbAlerta['text'] =('''Sua senha precisa ser Forte !!!
-            deve conter ao menos um dígito
+            self.lbAlerta['text'] ='Digite um email valido'
+        if user.cadastrarUsuario(nome, email, senha) == 4:
+            self.lbAlerta['text'] = ('''Sua senha precisa ser Forte !!!
             * deve conter ao menos uma letra minúscula         
             * deve conter ao menos uma letra maiúscula         
             * deve conter ao menos um caractere especial       
             * deve conter ao menos 8 dos caracteres mencionados
                     ''')
-        if user.cadastrarUsuario(nome, email, senha) == True and user.cadastrarUsuario(nome, email, senha) == 1:
-            self.lbAlerta['text'] ='Ja existe um usuario com Nome Ou senha cadastrado'
+        if user.cadastrarUsuario(nome, email, senha) == 5:
+            self.lbAlerta['text'] = 'Email ja utilizado no sistema'
 
+        if user.cadastrarUsuario(nome, email, senha) == 1:
+            self.lbAlerta['text'] = 'Cadastrado com Sucesso'
 
-        if user.cadastrarUsuario(nome, email, senha) == 4:
-            user.cadastrarUsuario(nome, email, senha)
-            self.lbAlerta['text']='Cadastro realizado com sucesso !!!!'
-        else:
-            print(user.cadastrarUsuario(nome, email, senha))
 
 
 
@@ -96,7 +89,7 @@ class Aplicacao(validacao):
         self.entEmailUsuario.place(relx=0.35, rely=0.20)
 
         Label(nwwindow, text='Senha', bg='white').place(relx=0.10, rely=0.30)
-        self.entSenhausuario = Entry(nwwindow)
+        self.entSenhausuario = Entry(nwwindow,show="*")
         self.entSenhausuario.place(relx=0.35, rely=0.30)
 
         self.lbAlerta =Label (nwwindow,text='',bg='white')
@@ -106,3 +99,4 @@ class Aplicacao(validacao):
 
 
 Aplicacao()
+
